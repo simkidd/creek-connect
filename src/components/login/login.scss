@@ -1,4 +1,5 @@
-.login__, .signUp__ {
+.login__,
+.signUp__ {
     width: 100%;
     background: #FFFFFF;
     box-shadow: 1px 1px 18px 5px rgba(5, 68, 168, 0.25);
@@ -6,12 +7,13 @@
     max-width: 450px;
     margin-top: 1.5rem;
     position: relative;
-    &.signUp__{
-        &::before{
+
+    &.signUp__ {
+        &::before {
             left: 42%;
         }
     }
-    
+
     &::before {
         content: "";
         position: absolute;
@@ -22,7 +24,7 @@
         border-right: 20px solid transparent;
         border-bottom: 20px solid #FFFFFF;
     }
-    
+
     .login__wrapper {
         padding: 50px 40px 35px;
 
@@ -32,7 +34,7 @@
 
             .input__container {
                 margin-bottom: 25px;
-                
+
                 input {
                     background: #C4C4C4;
                     border-radius: 50px;
@@ -41,14 +43,20 @@
                     outline: 0;
                     padding: 16px 35px;
                     font-size: 16px;
-                    
-                    &:focus{
+
+                    &:focus {
                         box-shadow: 1px 1px 5px rgba(5, 68, 168, 0.25);
                     }
 
                     &::placeholder {
                         color: #fff;
                     }
+                }
+
+                .error__message {
+                    color: red;
+                    font-size: 12px;
+                    margin-top: 5px;
                 }
             }
 
