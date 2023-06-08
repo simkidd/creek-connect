@@ -1,0 +1,100 @@
+.right__bar {
+    flex: 1.1;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 3rem 2rem 1rem;
+
+    .right__container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .right__profile {
+            display: flex;
+            height: 20%;
+            flex-direction: column;
+
+            .right__header {
+                display: flex;
+                align-self: end;
+                margin-right: 2rem;
+
+                .avatar__wrapper {
+                    display: flex;
+                    align-items: center;
+
+                    .avatar {
+                        width: 48px;
+                        height: 48px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        margin-right: .3rem;
+                        background: #333333;
+                    }
+                }
+            }
+        }
+
+        .rt__inner {
+            background: #C4C4C4;
+            box-shadow: 1px 1px 18px 5px rgba(5, 68, 168, 0.1);
+            border-radius: 30px;
+            flex: 1;
+            padding: 1.5rem 1rem;
+
+            .avt__ {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                margin-bottom: 0.5rem;
+
+                .avatar {
+                    width: 90px;
+                    height: 90px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    background: #333333;
+                }
+
+                .avatar__wrapper {
+                    display: flex;
+                    align-items: center;
+                    padding: 4px 6px;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+
+                    .name {
+                        font-size: 18px;
+                        font-weight: bold;
+                    }
+                }
+            }
+
+            .msg__media {
+                border-top: 1px solid #000;
+                padding: 0.5rem 0;
+
+                h3 {
+                    text-align: center;
+                }
+                .media__grid{
+                    display: grid;
+                    gap: 0.5rem;
+                    grid-template-columns: 80px 80px;
+                    justify-content: center;
+                    padding-top: 1rem;
+                    
+                    .grid__item{
+                        height: 70px;
+                        background: #333333;
+                    }
+                }
+            }
+        }
+    }
+
+}

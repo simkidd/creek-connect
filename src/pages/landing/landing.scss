@@ -1,0 +1,122 @@
+.landing {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+
+    .landing__wrap {
+        width: 100%;
+
+        .nav__wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            // height: 80px;
+            overflow: hidden;
+            padding: 1rem 0;
+            margin: 0 auto;
+            max-width: calc(1440px - 144px*2);
+            width: 100%;
+
+            .logo {
+                display: flex;
+                align-items: center;
+                width: 250px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                }
+            }
+
+            .nav__links {
+                display: flex;
+                align-items: center;
+                gap: 30px;
+
+                a {
+                    font-size: 18px;
+                    line-height: 22px;
+
+                    &.login__btn {
+                        border: 1px solid #0544A8;
+                        border-radius: 50px;
+                        padding: 10px 20px;
+                    }
+
+                    &.signIn__btn {
+                        border: 1px solid #0544A8;
+                        background: #0544A8;
+                        color: #fff;
+                        border-radius: 50px;
+                        padding: 10px 20px;
+                    }
+                }
+            }
+        }
+
+        .landing__body {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 107px;
+            height: 100%;
+            margin-top: 8%;
+
+            .landing__body__left {
+                position: relative;
+                width: 40%;
+
+                .text__wrap {
+
+                    h1 {
+                        font-weight: 300;
+                        font-size: 64px;
+                        line-height: 77px;
+
+                        &:nth-of-type(2) {
+                            font-weight: 900;
+                        }
+                    }
+                }
+
+                .line {
+                    position: absolute;
+                    left: -25%;
+                    bottom: -125%;
+                    z-index: -1;
+
+                    img {
+                        width: 100%;
+                        object-fit: contain;
+                    }
+                }
+            }
+
+            .landing__body__right {
+                width: 60%;
+                position: relative;
+
+                .img__wrap {
+                    position: absolute;
+                    left: -13%;
+                    bottom: -260px;
+                    z-index: -1;
+
+                    img {
+                        width: 100%;
+                        object-fit: contain;
+                    }
+
+                    p {
+                        font-weight: 600;
+                        font-size: 24px;
+                        line-height: 29px;
+                        text-align: center;
+                        margin-top: 0.5rem;
+                    }
+                }
+            }
+        }
+    }
+}
