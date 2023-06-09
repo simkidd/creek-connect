@@ -1,5 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   // Your Firebase configuration details here
@@ -15,8 +17,10 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
+// Get Firebase Authentication instance
+export const auth = getAuth(app);
 
-// Initialize Firebase Authentication and get a reference to the service
-const auth = getAuth(app);
+// Get Firestore database instance
+export const db = getFirestore(app);
 
-export default auth;
+export const storage = getStorage(app);

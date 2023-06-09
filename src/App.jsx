@@ -7,6 +7,7 @@ import Login from "./components/login/Login";
 import SignUp from "./components/signUp/SignUp";
 import Chat from "./pages/chat/Chat";
 import ChatContainer from "./components/chatContainer/ChatContainer";
+import ProtectedRoute from "./private/ProtectedRoute";
 
 const App = () => {
   return (
@@ -17,9 +18,15 @@ const App = () => {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<SignUp />} />
         </Route>
-        <Route element={<Chat />}>
-          <Route path="/chat/3" element={<ChatContainer/>}  />
-        </Route>
+
+        <Route
+          path="/chat"
+          element={
+            <ProtectedRoute>
+              <Chat />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </Router>
   );

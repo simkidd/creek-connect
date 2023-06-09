@@ -1,18 +1,45 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./rightBar.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { auth } from "../../firebase";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const RightBar = () => {
+  const { currentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
+    auth
+      .signOut()
+      .then(() => {
+        // Sign out successful
+        // You can add additional logic here, such as redirecting to a login page
+        navigate("/login");
+      })
+      .catch((error) => {
+        // An error occurred while signing out
+        // You can handle the error or display an error message to the user
+        console.error("Error signing out:", error);
+      });
+  };
+
   return (
     <div className="right__bar">
       <div className="right__container">
         <div className="right__profile">
           <div className="right__header">
             <Link className="avatar__wrapper">
-              <img className="avatar" src="avatar2.png" alt="CurrentUser" />
+              <img
+                className="avatar"
+                src={currentUser.photoURL}
+                alt="CurrentUser"
+              />
             </Link>
           </div>
-          <div></div>
+          <div>{currentUser.displayName}</div>
+          <div>
+            <button onClick={handleSignOut}>Sign Out</button>
+          </div>
         </div>
         <div className="rt__inner">
           <div className="avt__">
@@ -24,10 +51,10 @@ const RightBar = () => {
           <div className="msg__media">
             <h3>Photos and Multimedia</h3>
             <div className="media__grid">
-                <div className="grid__item"></div>
-                <div className="grid__item"></div>
-                <div className="grid__item"></div>
-                <div className="grid__item"></div>
+              <div className="grid__item"></div>
+              <div className="grid__item"></div>
+              <div className="grid__item"></div>
+              <div className="grid__item"></div>
             </div>
           </div>
         </div>

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./login.scss";
 import { useNavigate } from "react-router-dom";
-import auth from "../../firebase";
+import { auth } from "../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { BsEye, BsEyeSlash } from "react-icons/bs";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -14,6 +15,10 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+
+  const togglePswShow = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,11 +47,11 @@ const Login = () => {
     }
 
     try {
-      setIsLoading(true)
+      setIsLoading(true);
       // Sign in with email and password
       await signInWithEmailAndPassword(auth, email, password);
 
-      navigate("/");
+      navigate("/chat");
     } catch (error) {
       // Handle login errors
       if (error.code === "auth/user-not-found") {
@@ -76,6 +81,7 @@ const Login = () => {
         <form onSubmit={handleSubmit}>
           <div className="input__container">
             <input
+              className={`${errors.email && "error"}`}
               type="text"
               placeholder="Email"
               value={email}
@@ -87,11 +93,15 @@ const Login = () => {
           </div>
           <div className="input__container">
             <input
-              type="password"
+              className={`${errors.password && "error"}`}
+              type={showPassword ? "text" : "password"}
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            <span className="psw__toggle" onClick={togglePswShow}>
+              {showPassword ? <BsEyeSlash /> : <BsEye />}
+            </span>
             {errors.password && (
               <span className="error__message">{errors.password}</span>
             )}
