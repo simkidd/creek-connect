@@ -18,7 +18,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 const Search = () => {
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(false);
 
   const { currentUser } = useContext(AuthContext);
 
@@ -28,14 +28,24 @@ const Search = () => {
       where("displayName", "==", username)
     );
 
+    // try {
+    //   const querySnapshot = await getDocs(q);
+    //   querySnapshot.forEach((doc) => {
+    //     setUser(doc.data());
+    //   });
+    // } catch (error) {
+    //   console.log(error);
+    //   setError(true);
+    // }
     try {
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        setUser(doc.data());
-      });
-    } catch (err) {
-      setError(true);
-    }
+        const querySnapshot = await getDocs(q);
+        const userData = querySnapshot.docs.map((doc) => doc.data());
+        setUser(userData[0] || null);
+        setError(userData.length === 0);
+      } catch (error) {
+        console.log(error);
+        setError(true);
+      }
   };
 
   const handleKey = (e) => {
@@ -89,6 +99,7 @@ const Search = () => {
           type="text"
           placeholder="Search"
           onKeyDown={handleKey}
+          value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
       </div>

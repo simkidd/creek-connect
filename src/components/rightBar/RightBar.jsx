@@ -3,9 +3,11 @@ import "./rightBar.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase";
 import { AuthContext } from "../../contexts/AuthContext";
+import { ChatContext } from "../../contexts/ChatContext";
 
 const RightBar = () => {
   const { currentUser } = useContext(AuthContext);
+  const { data } = useContext(ChatContext);
   const navigate = useNavigate();
 
   const handleSignOut = () => {
@@ -43,9 +45,9 @@ const RightBar = () => {
         </div>
         <div className="rt__inner">
           <div className="avt__">
-            <img className="avatar" src="avatar2.png" alt="Avatar" />
+            <img className="avatar" src={data.user?.photoURL} alt="Avatar" />
             <Link className="avatar__wrapper">
-              <h3 className="name">John Doe</h3>
+              <h3 className="name">{data.user?.displayName}</h3>
             </Link>
           </div>
           <div className="msg__media">

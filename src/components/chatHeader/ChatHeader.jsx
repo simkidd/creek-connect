@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./chatHeader.scss";
 import { Link } from "react-router-dom";
+import { MdCall, MdMoreVert } from "react-icons/md";
+import { FaVideo } from "react-icons/fa";
+import { ChatContext } from "../../contexts/ChatContext";
 
 const ChatHeader = () => {
+  const { data } = useContext(ChatContext);
+
   // Dummy online status (you can replace this with actual logic)
   const isOnline = true;
   const lastSeen = "Last seen: 5 minutes ago";
@@ -12,14 +17,20 @@ const ChatHeader = () => {
       <div className="header__wrap">
         <Link className="avatar__wrapper">
           <div className="avatar">
-            <img src="avatar2.png" alt="Avatar" />
+            <img src={data.user?.photoURL} alt="Avatar" />
             {isOnline && <span className="status online"></span>}
           </div>
           <div className="profile__">
-            <h3 className="name">John Doe</h3>
+            <h3 className="name">{data.user?.displayName}</h3>
             <p className="last-seen">{lastSeen}</p>
           </div>
         </Link>
+
+        <div className="header__contact">
+          <MdCall  />
+          <FaVideo  />
+          <MdMoreVert  />
+        </div>
       </div>
     </div>
   );

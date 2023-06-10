@@ -3,7 +3,6 @@
     align-items: center;
     background-color: #fff;
     padding: 12px 8px;
-    // border-top: 1px solid #e0e0e0;
 
     .input__wrap {
         flex-grow: 1;
@@ -16,14 +15,14 @@
             margin: 8px;
             cursor: pointer;
             align-self: end;
-            &:nth-of-type(2){
-                margin-bottom: 11px;
-            }
         }
+
+
 
         textarea {
             width: 100%;
-            padding: 10px;
+            padding:0 10px;
+            padding-right: 15px;
             height: 100%;
             border: none;
             outline: none;
@@ -43,21 +42,38 @@
             scrollbar-width: none;
             /* Remove scrollbar on Firefox */
             -ms-overflow-style: none;
+            box-sizing: border-box;
         }
 
     }
 
-    button {
-        cursor: pointer;
-        margin: 0 0.8rem;
-        border-radius: 50%;
+    .send {
         display: flex;
         align-items: center;
-        justify-content: center;
-        padding: 10px;
-        background: #0544A8;
-        color: #fff;
-        border: 0;
-        box-shadow: 3px 2px 8px 4px rgba(5, 68, 168, 0.25);
+        gap: 10px;
+        align-self: end;
+
+        label {
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        button {
+            cursor: pointer;
+            // margin: 0 0.8rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            color: #fff;
+            border: 0;
+            background: #0544A8;
+            box-shadow: 3px 2px 8px 4px rgba(5, 68, 168, 0.25);
+            &:hover{
+                transform: scale(1.05);
+            }
+        }
     }
+
 }

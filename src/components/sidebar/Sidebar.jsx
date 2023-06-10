@@ -8,7 +8,7 @@ import Search from "../search/Search";
 import { AuthContext } from "../../contexts/AuthContext";
 import { ChatContext } from "../../contexts/ChatContext";
 import { db } from "../../firebase";
-import {doc, onSnapshot} from 'firebase/firestore'
+import { doc, onSnapshot } from "firebase/firestore";
 
 const Sidebar = () => {
   const [chats, setChats] = useState([]);
@@ -59,13 +59,23 @@ const Sidebar = () => {
         <Search />
 
         <div className="conversation__list">
-          <div className="conversation__item" >
-            <img src="" alt="Avatar" />
-            <div className="conversation__details">
-              <h3>conversation.name</h3>
-              <p>conversation.lastMessage</p>
-            </div>
-          </div>
+          {Object.entries(chats)
+            .sort((a, b) => b[1].date - a[1].date)
+            .map((chat) => (
+              <div
+                className="conversation__item"
+                key={chat[0]}
+                onClick={() => handleSelect(chat[1].userInfo)}
+              >
+                <div className="avatar__cover">
+                  <img src={chat[1].userInfo.photoURL} alt="Avatar" />
+                </div>
+                <div className="conversation__details">
+                  <h4>{chat[1].userInfo.displayName}</h4>
+                  <span>{chat[1].lastMessage?.text}</span>
+                </div>
+              </div>
+            ))}
         </div>
       </div>
     </div>

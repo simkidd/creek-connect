@@ -1,29 +1,37 @@
-import React from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import "./message.scss";
+import { AuthContext } from "../../contexts/AuthContext";
+import { ChatContext } from "../../contexts/ChatContext";
 
-const Message = () => {
+const Message = ({ message }) => {
+  const { currentUser } = useContext(AuthContext);
+  const { data } = useContext(ChatContext);
+
+  const msgRef = useRef();
+
+  useEffect(() => {
+    msgRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [message]);
+
+  const isSentMessage = message.senderId === currentUser.uid;
+  
+
   return (
-    <>
-      <div className="message recieved__msg">
-        <div className="avatar recieved__av">
-          <img src="" alt="avatar" />
-        </div>
-        <div className="message__content__wrap">
-          <div className="message__content recieved">hidnfndndnindindfinfindfndkndkndkndkdnkdndknfkdnfkdnfkdnkdnkdndkndkndkdndkndkdn</div>
-          <span className="message__timestamp recieved__time">1 min ago</span>
-        </div>
+    <div ref={msgRef} className={`message ${isSentMessage ? "sent" : ""}`}>
+      <div className="avatar">
+        <img
+          src={isSentMessage ? currentUser.photoURL : data.user.photoURL}
+          alt="avatar"
+        />
       </div>
-
-      <div className="message sent__msg">
-        <div className="message__content__wrap">
-          <div className="message__content sent">heyjfjdnfjdnfjdnjdnfjdnfdjnjdnfkjdnfjdndnfdjfdnfjdnfkjdnkjfndfndndkdnjkdnfjdknfdknfdkn</div>
-          <span className="message__timestamp sent__time">1 min ago</span>
+      <div className="message__content__wrap">
+        <div className="message__content">
+          <p>{message.text}</p>
+          {message.img && <img src={message.img} alt="" />}
         </div>
-        <div className="avatar sent__av">
-          <img src="" alt="avatar" />
-        </div>
+        <span className="message__timestamp recieved__time">1 min ago</span>
       </div>
-    </>
+    </div>
   );
 };
 
