@@ -5,6 +5,12 @@
     width: 100%;
     gap: 5px;
 
+    &:hover {
+        .message__options {
+          display: flex;
+        }
+      }
+
     .avatar {
         width: 40px;
         height: 40px;
@@ -31,17 +37,30 @@
             background: #0544A8;
             border-radius: 20px 20px 20px 0px;
             color: #fff;
-            padding: 8px 12px;
-            
-            p{
-                white-space: pre-wrap;
-                word-wrap: break-word;
-                text-align: left;
-                line-height: 20px;
+            overflow: hidden;
+
+            .message__text {
+
+                p {
+                    padding: 8px 12px;
+                    white-space: pre-wrap;
+                    word-wrap: break-word;
+                    text-align: left;
+                    line-height: 20px;
+                }
             }
 
-            img {
-                width: 10%;
+            .message__img {
+                width: 150px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
             }
         }
 
@@ -50,6 +69,8 @@
             color: #888;
             display: flex;
         }
+
+        
     }
 
     &.sent {
@@ -63,6 +84,52 @@
 
         .message__timestamp {
             justify-content: flex-end;
+        }
+
+    }
+
+    .message__options {
+        align-self: center;
+        position: relative;
+        margin: 10px;
+        display: none;
+        
+        .more-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #0544A8;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+        }
+
+        .options-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 5px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+
+            button {
+                display: flex;
+                align-items: center;
+                padding: 5px;
+                border: none;
+                background: none;
+                cursor: pointer;
+
+                svg {
+                    margin-right: 5px;
+                    color: #0544A8;
+                }
+
+                &:hover {
+                    background-color: #f2f2f2;
+                }
+            }
         }
     }
 }

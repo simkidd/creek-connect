@@ -6,7 +6,6 @@ import AppAuth from "./pages/appAuth/AppAuth";
 import Login from "./components/login/Login";
 import SignUp from "./components/signUp/SignUp";
 import Chat from "./pages/chat/Chat";
-import ChatContainer from "./components/chatContainer/ChatContainer";
 import ProtectedRoute from "./private/ProtectedRoute";
 
 const App = () => {

@@ -19,8 +19,6 @@ const ChatMessages = () => {
     };
   }, [data.chatId]);
 
-  console.log(messages);
-
   return (
     <div className="chat__messages">
       {messages.map((message) => {

@@ -2,76 +2,96 @@
     display: flex;
     align-items: center;
     background-color: #fff;
-    padding: 12px 8px;
+    flex-direction: column;
 
-    .input__wrap {
-        flex-grow: 1;
-        background: #C4C4C4;
-        border-radius: 30px;
-        display: flex;
-        align-items: center;
+    .preview {
+        align-self: start;
+        padding: 8px 12px;
+        height: 100px;
+        background: #6e6e6e;
+        width: 100%;
 
-        svg {
-            margin: 8px;
-            cursor: pointer;
-            align-self: end;
-        }
-
-
-
-        textarea {
-            width: 100%;
-            padding:0 10px;
-            padding-right: 15px;
+        img {
             height: 100%;
-            border: none;
-            outline: none;
-            font-size: 16px;
-            box-sizing: border-box;
-            resize: none;
-            /* Enable word wrapping */
-            overflow-wrap: break-word;
-            word-wrap: break-word;
-            min-height: 20px;
-            /* Minimum height (1 row) */
-            max-height: 80px;
-            /* Maximum height (6 rows) */
-            overflow-y: auto;
-            font-family: 'Roboto', sans-serif;
-            background: transparent;
-            scrollbar-width: none;
-            /* Remove scrollbar on Firefox */
-            -ms-overflow-style: none;
-            box-sizing: border-box;
+            object-fit: contain;
         }
-
     }
 
-    .send {
+    .input__container {
+        padding: 12px 8px;
         display: flex;
-        align-items: center;
-        gap: 10px;
-        align-self: end;
+        width: 100%;
 
-        label {
-            margin-left: 10px;
-            cursor: pointer;
-        }
-
-        button {
-            cursor: pointer;
-            // margin: 0 0.8rem;
-            border-radius: 50%;
+        .input__wrap {
+            flex-grow: 1;
+            background: #C4C4C4;
+            border-radius: 30px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding: 10px;
-            color: #fff;
-            border: 0;
-            background: #0544A8;
-            box-shadow: 3px 2px 8px 4px rgba(5, 68, 168, 0.25);
-            &:hover{
-                transform: scale(1.05);
+
+            svg {
+                margin: 8px;
+                cursor: pointer;
+                align-self: end;
+            }
+
+
+
+            textarea {
+                width: 100%;
+                padding: 0 10px;
+                padding-right: 15px;
+                height: 100%;
+                border: none;
+                outline: none;
+                font-size: 16px;
+                box-sizing: border-box;
+                resize: none;
+                /* Enable word wrapping */
+                overflow-wrap: break-word;
+                word-wrap: break-word;
+                min-height: 20px;
+                /* Minimum height (1 row) */
+                max-height: 80px;
+                /* Maximum height (6 rows) */
+                overflow-y: auto;
+                font-family: 'Roboto', sans-serif;
+                background: transparent;
+                scrollbar-width: none;
+                /* Remove scrollbar on Firefox */
+                -ms-overflow-style: none;
+                box-sizing: border-box;
+            }
+
+        }
+
+        .send {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            align-self: end;
+
+            label {
+                margin-left: 10px;
+                cursor: pointer;
+            }
+
+            button {
+                cursor: pointer;
+                // margin: 0 0.8rem;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 10px;
+                color: #fff;
+                border: 0;
+                background: #0544A8;
+                box-shadow: 3px 2px 8px 4px rgba(5, 68, 168, 0.25);
+
+                &:hover {
+                    transform: scale(1.05);
+                }
             }
         }
     }

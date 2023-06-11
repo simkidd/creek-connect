@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import "./chatInput.scss";
 import { MdSend } from "react-icons/md";
-import { HiEmojiHappy } from "react-icons/hi";
 import { BsEmojiHeartEyesFill } from "react-icons/bs";
-import { FaFileImage } from "react-icons/fa";
+import { FaFileImage, FaTimes } from "react-icons/fa";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { db, storage } from "../../firebase";
 import {
@@ -16,16 +15,28 @@ import {
 import { AuthContext } from "../../contexts/AuthContext";
 import { ChatContext } from "../../contexts/ChatContext";
 import { v4 as uuid } from "uuid";
+import Preview from "../../assets/316224577_816000659730251_6847587843923273879_n.jpg";
 
 const ChatInput = () => {
   const [text, setText] = useState("");
   const [img, setImg] = useState(null);
+  const [previewImg, setPreviewImg] = useState(null);
   const textareaRef = useRef();
 
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
   const handleSend = async () => {
+    if (!text && !img) {
+      // No text or image, return early
+      return;
+    }
+
+    setText("");
+    setImg(null);
+    setPreviewImg(null);
+    adjustTextareaHeight();
+
     if (img) {
       const storageRef = ref(storage, uuid());
       const uploadTask = uploadBytesResumable(storageRef, img);
@@ -33,7 +44,10 @@ const ChatInput = () => {
       uploadTask.on(
         "state_changed",
         (snapshot) => {
-          // Progress monitoring if needed
+          // Progress monitoring
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log(`Upload is ${progress}% complete`);
         },
         (error) => {
           // Handle the error if the upload fails
@@ -77,10 +91,6 @@ const ChatInput = () => {
       },
       [data.chatId + ".date"]: serverTimestamp(),
     });
-
-    setText("");
-    setImg(null);
-    adjustTextareaHeight();
   };
 
   const adjustTextareaHeight = () => {
@@ -93,42 +103,75 @@ const ChatInput = () => {
   }, []);
 
   const handleInputChange = (e) => {
-    setText(e.target.value);
+    setText(e.target.value); // Update the text state with the input value
     adjustTextareaHeight();
-
-    if (e.target.files.length > 0) {
-      setImg(e.target.files[0]);
-    }
   };
+
+  const handleImageChange = (e) => {
+    if (e.target.files.length > 0) {
+      const file = e.target.files[0];
+      setImg(file);
+
+      // Preview the image
+      const reader = new FileReader();
+      reader.onload = () => {
+        setPreviewImg(reader.result);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setImg(null);
+      setPreviewImg(null);
+    }
+
+    adjustTextareaHeight();
+  };
+
+  
+  const handleRemoveImage = () => {
+    setImg(null);
+    setPreviewImg(null);
+  };
+  
 
   return (
     <div className="chat__input">
-      <div className="input__wrap">
-        <BsEmojiHeartEyesFill size={23} />
-        <textarea
-          type="text"
-          value={text}
-          onChange={handleInputChange}
-          placeholder="Message..."
-          rows={1}
-          ref={textareaRef}
-        />
-      </div>
+      {previewImg && (
+        <div className="preview">
+          <img src={previewImg} alt="Preview" />
+          <button className="remove-image-button" onClick={handleRemoveImage}>
+            <FaTimes />
+          </button>
+        </div>
+      )}
+      <div className="input__container">
+        <div className="input__wrap">
+          <BsEmojiHeartEyesFill size={23} />
+          <textarea
+            type="text"
+            value={text}
+            onChange={handleInputChange}
+            placeholder="Message..."
+            rows={1}
+            ref={textareaRef}
+          />
+        </div>
 
-      <div className="send">
-        <input
-          type="file"
-          style={{ display: "none" }}
-          id="file"
-          onChange={(e) => setImg(e.target.files[0])}
-        />
-        <label htmlFor="file">
-          <FaFileImage size={24} />
-        </label>
+        <div className="send">
+          <input
+            type="file"
+            style={{ display: "none" }}
+            id="file"
+            // onChange={(e) => setImg(e.target.files[0])}
+            onChange={handleImageChange}
+          />
+          <label htmlFor="file">
+            <FaFileImage size={24} />
+          </label>
 
-        <button onClick={handleSend}>
-          <MdSend size={20} />
-        </button>
+          <button onClick={handleSend}>
+            <MdSend size={20} />
+          </button>
+        </div>
       </div>
     </div>
   );
